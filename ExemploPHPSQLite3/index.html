@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD com PHP e MySQL</title>
+    <script>
+        async function carregarDados() {
+            let resposta = await fetch('crud.php?action=read');
+            let dados = await resposta.json();
+            let tabela = document.getElementById('tabela');
+            tabela.innerHTML = "<tr><th>ID</th><th>Nome</th><th>Email</th></tr>";
+            dados.forEach(usuario => {
+                tabela.innerHTML += `<tr>
+                    <td>${usuario.id}</td>
+                    <td>${usuario.nome}</td>
+                    <td>${usuario.email}</td>
+                </tr>`;
+            });
+        }
+        window.onload = carregarDados;
+    </script>
+</head>
+<body>
+    <table id="tabela"></table>
+</body>
+</html>
